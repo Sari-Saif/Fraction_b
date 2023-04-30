@@ -53,7 +53,7 @@ TEST_CASE("Fraction subtraction test") {
     
     Fraction d(4, 5);
     float e = 0.4;
-    Fraction f = d - e; // 4/5 - 2/5 = 2/5
+    Fraction f = d -e; // 4/5 - 2/5 = 2/5
     CHECK(((f.getNumerator() == 2) && (f.getDenominator() == 5)));
     CHECK(__gcd(f.getNumerator(), f.getDenominator()) == 1);
 
