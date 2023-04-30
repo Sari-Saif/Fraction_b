@@ -25,8 +25,8 @@ namespace ariel
     // help function
     void simplify();
     // getters
-    int numerator() const;
-    int denominator() const;
+    int getNumerator() const;
+    int getDenominator() const;
 
     /*ctor*/
     Fraction(int, int);
