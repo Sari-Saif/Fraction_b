@@ -23,6 +23,9 @@ namespace ariel
         // simplify the fraction
         simplify();
     }
+    Fraction::Fraction(): _numerator(1), _denominator(1){
+
+    };
     Fraction Float_to_Fraction(float value)
     {
         int denominator = 1000;

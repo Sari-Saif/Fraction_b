@@ -30,6 +30,7 @@ namespace ariel
 
     /*ctor*/
     Fraction(int, int);
+    Fraction();
     // convert float to fraction
     Fraction Float_to_Fraction(float);
     /* istream and ostream */
