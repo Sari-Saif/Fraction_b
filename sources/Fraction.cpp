@@ -101,7 +101,7 @@ namespace ariel
         return Fraction(num, den);
     }
 
-    Fraction operator+(Fraction &frac, float j)
+    Fraction operator+(Fraction frac, float j)
     {
         Fraction a = Fraction(j);
         int num = frac.getDenominator() * a.getNumerator() + frac.getNumerator() * a.getDenominator();
@@ -149,7 +149,7 @@ namespace ariel
         return Fraction(ner, det);
     }
 
-    Fraction operator*(Fraction &frac, float num)
+    Fraction operator*(Fraction frac, float num)
     {
         Fraction a = Fraction(num);
         a.simplify();
