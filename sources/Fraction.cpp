@@ -83,7 +83,7 @@ namespace ariel
         return into;
     }
 
-    Fraction Fraction::operator+(Fraction &other)
+    Fraction Fraction::operator+(Fraction other)
     {
         // default state and dont need of default constructor :)
         Fraction result(0, 1);
@@ -93,7 +93,7 @@ namespace ariel
         return result;
     }
 
-    Fraction operator+(float j, const Fraction &frac)
+    Fraction operator+(float j, Fraction frac)
     {
         Fraction a = Fraction(j);
         int num = frac.getDenominator() * a.getNumerator() + frac.getNumerator() * a.getDenominator();
@@ -110,23 +110,25 @@ namespace ariel
     }
 
     // here we use the + operator to subscracts
-    Fraction Fraction::operator-(Fraction &frac)
+    Fraction Fraction::operator-(Fraction frac)
     {
-        return this->operator+(Fraction(-1 * (frac._numerator), frac._denominator));
+        int num = this->_denominator * frac.getNumerator() + frac.getDenominator() * this->_numerator;
+        int den = frac.getDenominator() * this->_denominator;
+        return Fraction(num, den);
     }
 
-    Fraction operator-(float num, Fraction &frac)
+    Fraction operator-(float num, Fraction frac)
     {
-        return Fraction(num) - Fraction(frac._numerator, frac._denominator);
+        return Fraction(num) - Fraction(frac.getNumerator(), frac.getDenominator());
     }
 
-    Fraction operator-(Fraction &other, float num)
+    Fraction operator-(Fraction other, float num)
     {
 
         return (Fraction(num) - other);
     }
 
-    Fraction Fraction::operator*(Fraction &other)
+    Fraction Fraction::operator*(Fraction other)
     {
         // default state and dont need of default constructor :)
         Fraction result(0, 1);
@@ -136,7 +138,7 @@ namespace ariel
         return result;
     }
 
-    Fraction operator*(float num, Fraction &frac)
+    Fraction operator*(float num, Fraction frac)
     {
         Fraction a = Fraction(num);
         a.simplify();
@@ -157,7 +159,7 @@ namespace ariel
         return Fraction(ner, det);
     }
 
-    Fraction Fraction::operator/(Fraction &other)
+    Fraction Fraction::operator/(Fraction other)
     {
         if (other._numerator == 0)
         {
@@ -170,7 +172,7 @@ namespace ariel
         return this->operator*(Fraction(other._denominator, other._numerator));
     }
 
-    Fraction operator/(float num, Fraction &frac)
+    Fraction operator/(float num, Fraction frac)
     {
         if (frac._numerator == 0)
         {
@@ -182,7 +184,7 @@ namespace ariel
         return Fraction(num) * Fraction(frac._denominator, frac._numerator);
     }
 
-    Fraction operator/(Fraction &frac, float num)
+    Fraction operator/(Fraction frac, float num)
     {
         if (num == 0)
         {
@@ -193,88 +195,88 @@ namespace ariel
         return (Fraction(frac._numerator, frac._denominator) / Fraction(num));
     }
 
-    bool Fraction::operator==(Fraction &other) const
+    bool Fraction::operator==(Fraction other) const
     {
         return (this->_numerator == other._numerator) && (this->_denominator == other._denominator);
     }
 
-    bool operator==(float num, Fraction &frac)
+    bool operator==(float num, Fraction frac)
     {
         float num_0 = ((float)frac._denominator / (float)frac._numerator);
         return (num == num_0);
     }
 
-    bool operator==(Fraction &frac, float num)
+    bool operator==(Fraction frac, float num)
     {
         return (frac == num);
     }
 
-    bool Fraction::operator<(Fraction &other)
+    bool Fraction::operator<(Fraction other)
     {
         return ((float)this->_numerator / (float)this->_denominator) < ((float)other._numerator / (float)other._denominator);
     }
 
-    bool operator<(Fraction &frac, float num)
+    bool operator<(Fraction frac, float num)
     {
 
         return ((float)frac._numerator / (float)frac._denominator) < num;
     }
 
     // prepare for check.
-    bool operator<(float num, Fraction &frac)
+    bool operator<(float num, Fraction frac)
     {
 
         return num < ((float)frac._numerator / (float)frac._denominator);
     }
 
-    bool Fraction::operator<=(Fraction &other)
+    bool Fraction::operator<=(Fraction other)
     {
 
         return ((float)(this->_numerator / this->_denominator)) <= ((float)(other._numerator / other._denominator));
     }
 
-    bool operator<=(Fraction &frac, float num)
+    bool operator<=(Fraction frac, float num)
     {
 
         return (num <= frac);
     }
 
-    bool operator<=(float num, Fraction &frac)
+    bool operator<=(float num, Fraction frac)
     {
 
         return frac._numerator <= num * frac._denominator;
     }
 
-    bool Fraction::operator>(Fraction &other)
+    bool Fraction::operator>(Fraction other)
     {
         return ((float)(this->_numerator / this->_denominator)) > ((float)(other._numerator / other._denominator));
     }
 
-    bool operator>(Fraction &frac, float num)
+    bool operator>(Fraction frac, float num)
     {
 
         return (((float)frac._numerator / (float)frac._denominator) > num);
     }
 
-    bool operator>(float num, Fraction &frac)
+    bool operator>(float num, Fraction frac)
     {
 
         return (num > ((float)frac._numerator / (float)frac._denominator));
     }
 
-    bool Fraction::operator>=(Fraction &other)
+    bool Fraction::operator>=(Fraction other)
     {
 
         return (float)(this->_numerator / this->_denominator) >= (float)(other._numerator / other._denominator);
     }
 
-    bool operator>=(Fraction &frac, float num)
+    bool operator>=(Fraction frac, float num)
     {
 
         return (num >= frac);
     }
 
-    bool operator>=(float num, Fraction &frac)
+    bool operator>=(float num, Fraction frac)
     {
 
         return (frac._numerator >= num * frac._denominator);
