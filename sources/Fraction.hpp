@@ -19,7 +19,7 @@ namespace ariel
     int _numerator;
     int _denominator;
     /*greatest common divisor of the original values of two integeres.*/
-    int GCD(int, int);
+    int GCD(int, int) const;
 
   public:
     // help function
@@ -29,10 +29,10 @@ namespace ariel
     int getDenominator() const;
 
     /*ctor*/
-    Fraction(int, int);
+    Fraction(const int, const int);
     Fraction();
-    // convert float to fraction
-    Fraction Float_to_Fraction(float);
+    //  ctor convert float to fraction
+    Fraction(float);
     /* istream and ostream */
     friend ostream &operator<<(ostream &, const Fraction &);
     friend istream &operator>>(istream &, Fraction &);
