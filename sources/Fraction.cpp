@@ -112,7 +112,7 @@ namespace ariel
     // here we use the + operator to subscracts
     Fraction Fraction::operator-(Fraction frac)
     {
-        int num = this->_denominator * frac.getNumerator() + frac.getDenominator() * this->_numerator;
+        int num = this->_numerator * frac.getDenominator() - frac.getNumerator() * this->_denominator;
         int den = frac.getDenominator() * this->_denominator;
         return Fraction(num, den);
     }
@@ -222,11 +222,10 @@ namespace ariel
         return ((float)frac._numerator / (float)frac._denominator) < num;
     }
 
-    // prepare for check.
     bool operator<(float num, Fraction frac)
     {
 
-        return num < ((float)frac._numerator / (float)frac._denominator);
+        return num < ((float)(frac._numerator /frac._denominator));
     }
 
     bool Fraction::operator<=(Fraction other)
