@@ -12,8 +12,8 @@ using std::ostream, std::istream, std::endl, std::cout;
 namespace ariel
 {
 
-    Fraction::Fraction(int numerator,
-                       int denominator) : _numerator(numerator), _denominator(denominator)
+    Fraction::Fraction(const int numerator,
+                       const int denominator) : _numerator(numerator), _denominator(denominator)
     {
         // possibility div by 0 !
         if (_denominator == 0)
@@ -23,17 +23,16 @@ namespace ariel
         // simplify the fraction
         simplify();
     }
-    Fraction::Fraction(): _numerator(1), _denominator(1){
+    Fraction::Fraction() : _numerator(1), _denominator(1){
 
-    };
-    Fraction Float_to_Fraction(float value)
+                                          };
+    Fraction::Fraction(float value)
     {
         int denominator = 1000;
         value *= 1000;
         // here we use the ctor , and there validation of if deminator == 0
         Fraction f(value, denominator);
         // f.simplify(); - there no need because this opreation done in c'tor by default
-        return f;
     }
     // getters
     int Fraction::getNumerator() const
@@ -49,7 +48,7 @@ namespace ariel
      * @param input two integeres(num_0, num_1)
      * @param return gcd(num_0,num_1)
      */
-    int Fraction::GCD(int num_0, int num_1)
+    int Fraction::GCD(int num_0, int num_1) const
     {
 
         if (num_0 == 0)
@@ -101,12 +100,12 @@ namespace ariel
 
     Fraction operator+(float j, const Fraction &frac)
     {
-        return (Float_to_Fraction(j) + frac);
+        return (Fraction(j) + frac);
     }
 
     Fraction operator+(const Fraction &frac, float j)
     {
-        return (Float_to_Fraction(j) + frac);
+        return (Fraction(j) + frac);
     }
 
     // here we use the + operator to subscracts
@@ -117,13 +116,13 @@ namespace ariel
 
     Fraction operator-(float num, const Fraction &frac)
     {
-        return Float_to_Fraction(num) + Fraction(-1 * (frac._numerator), frac._denominator);
+        return Fraction(num) - Fraction(frac._numerator, frac._denominator);
     }
 
     Fraction operator-(const Fraction &other, float num)
     {
 
-        return Float_to_Fraction(-num) + other;
+        return Fraction(num) - other;
     }
 
     Fraction Fraction::operator*(const Fraction &other)
@@ -139,19 +138,19 @@ namespace ariel
     Fraction operator*(float num, const Fraction &frac)
     {
         // 1. here we can be confidence that there no divided  with 0
-        return Float_to_Fraction(num) * frac;
+        return Fraction(num) * frac;
     }
 
     Fraction operator*(const Fraction &frac, float num)
     {
-        return Float_to_Fraction(num) * frac;
+        return Fraction(num) * frac;
     }
 
     Fraction Fraction::operator/(const Fraction &other)
     {
         if (other._numerator == 0)
         {
-            throw " the by 0 is not defined !";
+            throw std::runtime_error(" cannot be 0 .");
         }
 
         // using something already done.
@@ -164,22 +163,23 @@ namespace ariel
     {
         if (frac._numerator == 0)
         {
-            throw " the by 0 is not defined !";
+            throw std::runtime_error(" cannot be 0 .");
         }
 
         // 1. here too.
 
-        return Float_to_Fraction(num) * Fraction(frac._denominator, frac._numerator);
+        return Fraction(num) * Fraction(frac._denominator, frac._numerator);
     }
 
     Fraction operator/(const Fraction &frac, float num)
     {
         if (num == 0)
         {
-            throw " there no result to divide in zero ";
+            throw std::runtime_error(" cannot be 0 .");
+            ;
         }
 
-        return (Fraction(frac._numerator, frac._denominator) / Float_to_Fraction(num));
+        return (Fraction(frac._numerator, frac._denominator) / Fraction(num));
     }
 
     bool Fraction::operator==(const Fraction &other) const
@@ -225,7 +225,7 @@ namespace ariel
     bool operator<=(const Fraction &frac, float num)
     {
 
-        return num <= frac;
+        return (num <= frac);
     }
 
     bool operator<=(float num, const Fraction &frac)
