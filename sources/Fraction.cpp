@@ -26,7 +26,7 @@ namespace ariel
     Fraction::Fraction() : _numerator(1), _denominator(1){
 
                                           };
-    Fraction::Fraction(float value) : Fraction(static_cast<int>(value * 1000), 1000)
+    Fraction::Fraction(float value) : Fraction((value * 1000), 1000)
     {
     }
     // getters
