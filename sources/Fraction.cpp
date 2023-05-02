@@ -283,8 +283,19 @@ namespace ariel
 
     bool Fraction::operator>=(Fraction other)
     {
+        if (this->_numerator == other.getNumerator() && this->_denominator == other.getDenominator())
+        {
+            return true;
+        }
+        else if (this->_numerator == other.getNumerator())
+        {
+            return this->_denominator < other.getDenominator(); // must be true , satisfied answer .
+        }
 
-        return ((float)(this->_numerator / this->_denominator)) >= ((float)(other.getNumerator() / other.getDenominator()));
+        else
+        {
+            return ((float)(this->_numerator / this->_denominator)) >= ((float)(other.getNumerator() / other.getDenominator()));
+        }
     }
 
     bool operator>=(Fraction frac, float num)
