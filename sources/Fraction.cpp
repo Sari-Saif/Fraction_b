@@ -248,6 +248,10 @@ namespace ariel
 
     bool Fraction::operator>(Fraction other)
     {
+        if (this->_numerator == other.getNumerator())
+        {
+            return this->_denominator < other.getDenominator();
+        }
         return ((float)(this->_numerator / this->_denominator)) > ((float)(other.getNumerator() / other.getDenominator()));
     }
 
@@ -260,7 +264,7 @@ namespace ariel
     bool operator>(float num, Fraction frac)
     {
 
-        return Fraction(num) > ((float)(frac.getNumerator() /frac.getDenominator()));
+        return Fraction(num) > ((float)(frac.getNumerator() / frac.getDenominator()));
     }
 
     bool Fraction::operator>=(Fraction other)
