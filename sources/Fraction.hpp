@@ -124,7 +124,7 @@ namespace ariel
     /*
      equallity two Fractions
     */
-    bool operator==(Fraction) const;
+    bool operator==(Fraction);
     /*
       equallity float and Fraction(Fractoin == float)
     */

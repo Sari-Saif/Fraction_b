@@ -195,14 +195,14 @@ namespace ariel
         return (Fraction(frac._numerator, frac._denominator) / Fraction(num));
     }
 
-    bool Fraction::operator==(Fraction other) const
+    bool Fraction::operator==(Fraction other)
     {
         return (this->_numerator == other._numerator) && (this->_denominator == other._denominator);
     }
 
     bool operator==(float num, Fraction frac)
     {
-        float num_0 = ((float)frac._denominator / (float)frac._numerator);
+        float num_0 = ((float)(frac.getNumerator() / frac.getDenominator()));
         return (num == num_0);
     }
 
@@ -213,7 +213,7 @@ namespace ariel
 
     bool Fraction::operator<(Fraction other)
     {
-        return ((float)(this->_numerator / this->_denominator)) < ((float)(other.getNumerator() /other.getDenominator()));
+        return ((float)(this->_numerator / this->_denominator)) < ((float)(other.getNumerator() / other.getDenominator()));
     }
 
     bool operator<(Fraction frac, float num)
@@ -225,7 +225,7 @@ namespace ariel
     bool operator<(float num, Fraction frac)
     {
 
-        return num < ((float)(frac._numerator / frac._denominator));
+        return Fraction(num) < ((float)(frac._numerator / frac._denominator));
     }
 
     bool Fraction::operator<=(Fraction other)
@@ -237,7 +237,7 @@ namespace ariel
     bool operator<=(Fraction frac, float num)
     {
 
-        return (num <= frac);
+        return (frac <= Fraction(num));
     }
 
     bool operator<=(float num, Fraction frac)
@@ -248,19 +248,19 @@ namespace ariel
 
     bool Fraction::operator>(Fraction other)
     {
-        return ((float)(this->_numerator / this->_denominator)) > ((float)(other._numerator / other._denominator));
+        return ((float)(this->_numerator / this->_denominator)) > ((float)(other.getNumerator() / other.getDenominator()));
     }
 
     bool operator>(Fraction frac, float num)
     {
 
-        return (((float)frac._numerator / (float)frac._denominator) > num);
+        return ((float)(frac._numerator / frac._denominator)) > Fraction(num);
     }
 
     bool operator>(float num, Fraction frac)
     {
 
-        return (num > ((float)frac._numerator / (float)frac._denominator));
+        return (Fraction(num) > ((float)frac._numerator / (float)frac._denominator));
     }
 
     bool Fraction::operator>=(Fraction other)
