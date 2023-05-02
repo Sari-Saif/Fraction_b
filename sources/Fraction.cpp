@@ -215,7 +215,7 @@ namespace ariel
     {
         if (this->_numerator == other.getNumerator())
         {
-            return this->_denominator < other.getDenominator();
+            return this->_denominator > other.getDenominator();
         }
         return ((float)(this->_numerator / this->_denominator)) < ((float)(other.getNumerator() / other.getDenominator()));
     }
@@ -281,7 +281,7 @@ namespace ariel
     {
 
         return (frac >= Fraction(num));
-        }
+    }
 
     bool operator>=(float num, Fraction frac)
     {
