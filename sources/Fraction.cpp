@@ -84,8 +84,8 @@ namespace ariel
     istream &operator>>(istream &into, Fraction &other)
     {
         // temporary parameters
-        other._denominator == 1;
-        other._numerator == 1;
+        other._denominator = 1;
+        other._numerator = 1;
         into >> other._numerator >> other._denominator;
         if (other._denominator == 1)
         {
