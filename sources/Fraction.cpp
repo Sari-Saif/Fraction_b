@@ -225,6 +225,7 @@ namespace ariel
     bool operator<(Fraction frac, float num)
     {
         float num_1 = ((float)(frac.getNumerator() / frac.getDenominator()));
+        cout << num_1 << endl;
         return num_1 < num;
     }
 
