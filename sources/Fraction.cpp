@@ -224,22 +224,14 @@ namespace ariel
 
     bool operator<(Fraction frac, float num)
     {
-        Fraction a(num);
-        if (a.getNumerator() == frac.getNumerator())
-        {
-            return frac.getDenominator() > a.getDenominator(); // must be true , satisfied answer .
-        }
-        return ((float)(frac.getNumerator() / frac.getDenominator())) < ((float)(a.getNumerator() / a.getDenominator()));
+        float num_1 = ((float)(frac.getNumerator() / frac.getDenominator()));
+        return num_1 < num;
     }
 
     bool operator<(float num, Fraction frac)
     {
-        Fraction a(num);
-        if (a.getNumerator() == frac.getNumerator())
-        {
-            return a.getDenominator() > frac.getDenominator(); // must be true , satisfied answer .
-        }
-        return ((float)(a.getNumerator() / a.getDenominator())) < ((float)(frac.getNumerator() / frac.getDenominator()));
+        float num_1 = ((float)(frac.getNumerator() / frac.getDenominator()));
+        return num < num_1;
     }
 
     bool Fraction::operator<=(Fraction other)

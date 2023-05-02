@@ -113,8 +113,6 @@ TEST_CASE("Fraction < comparison operator")
 
     CHECK(b < a);
     CHECK_FALSE(b >= a);
-    cout << " b>=a : " << (b >= a) << endl;
-
     CHECK(0.3 < a);
     cout << " 0.3<a : " << (0.3 < a) << endl;
 
@@ -140,14 +138,11 @@ TEST_CASE("Fraction <= comparison operator")
 
 TEST_CASE("Fraction > comparison operator")
 {
-    Fraction a(1, 2), b(1, 4);
-
+    Fraction a(1, 2);
+    Fraction b(1, 4);
     CHECK(a > b);
-    cout << " a>b : " << (a > b) << endl;
-
     CHECK_FALSE(a <= b);
-    cout << " 0.3>a : " << (a) << endl;
-
+    // cout << " 0.3>a : " << (0.3 > a) << endl;
     CHECK(a > 0.3);
     CHECK_FALSE(a <= 0.3);
     cout << " a<=0.3 : " << (a < 0.3) << endl;
