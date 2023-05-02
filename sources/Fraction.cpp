@@ -260,7 +260,7 @@ namespace ariel
     bool operator>(float num, Fraction frac)
     {
 
-        return (Fraction(num) > ((float)frac._numerator / (float)frac._denominator));
+        return Fraction(num) > ((float)(frac.getNumerator() /frac.getDenominator()));
     }
 
     bool Fraction::operator>=(Fraction other)
