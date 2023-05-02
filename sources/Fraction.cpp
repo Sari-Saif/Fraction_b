@@ -83,13 +83,15 @@ namespace ariel
 
     istream &operator>>(istream &into, Fraction &other)
     {
-        char slash;
-        if (slash != '/')
+        // temporary parameters
+        other._denominator == 1;
+        other._numerator == 1;
+        into >> other._numerator >> other._denominator;
+        if (other._denominator == 1)
         {
             into.clear();
-            throw std::invalid_argument("Error ");
+            throw std::invalid_argument("there need two parameters to absorb to build a fractoin ");
         }
-        into >> other._numerator >> other._denominator;
         return into;
     }
 
