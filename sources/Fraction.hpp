@@ -35,7 +35,7 @@ namespace ariel
     Fraction(float);
 
     /* istream and ostream */
-    friend ostream &operator<<(ostream &, const Fraction &);
+    friend ostream &operator<<(ostream &, Fraction &);
     friend istream &operator>>(istream &, Fraction &);
 
     /*

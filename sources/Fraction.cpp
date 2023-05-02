@@ -71,14 +71,24 @@ namespace ariel
     }
 
     // must pass the stream by reference, not by value. streams are not copyable
-    ostream &operator<<(ostream &out, const Fraction &other)
+    ostream &operator<<(ostream &out, Fraction &other)
     {
-        out << other._numerator << "/" << other._denominator << endl;
+        if (typeid(other) != typeid(Fraction))
+        {
+            throw std::invalid_argument("Err");
+        }
+        out << other._numerator << "/" << other._denominator;
         return out;
     }
 
     istream &operator>>(istream &into, Fraction &other)
     {
+        char slash;
+        if (slash != '/')
+        {
+            into.clear();
+            throw std::invalid_argument("Error ");
+        }
         into >> other._numerator >> other._denominator;
         return into;
     }
@@ -197,20 +207,21 @@ namespace ariel
 
     bool Fraction::operator==(Fraction other)
     {
-        float num_0 = (((float)this->_numerator / (float)this->_numerator));
-        float num_1 = ((float)(other.getNumerator() / other.getDenominator()));
+        float num_0 = ((float)this->_numerator / (float)this->_denominator);
+        float num_1 = ((float)other.getNumerator() / (float)other.getDenominator());
         return num_0 == num_1;
     }
 
     bool operator==(float num, Fraction frac)
     {
-        float num_0 = (((float)frac.getNumerator() / (float)frac.getDenominator()));
+        float num_0 = ((float)frac.getNumerator() / (float)frac.getDenominator());
         return (num == num_0);
     }
 
     bool operator==(Fraction frac, float num)
     {
-        return (frac == num);
+        float num_0 = ((float)frac.getNumerator() / (float)frac.getDenominator());
+        return (num_0 == num);
     }
 
     bool Fraction::operator<(Fraction other)
