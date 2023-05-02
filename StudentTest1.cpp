@@ -114,11 +114,7 @@ TEST_CASE("Fraction < comparison operator")
     CHECK(b < a);
     CHECK_FALSE(b >= a);
     CHECK(0.3 < a);
-    cout << " 0.3<a : " << (0.3 < a) << endl;
-
     CHECK_FALSE(0.3 >= a);
-    cout << " 0.3>=a : " << (0.3 >= a) << endl;
-
     CHECK(a < 1);
     CHECK_FALSE(a >= 1);
 }
@@ -142,11 +138,8 @@ TEST_CASE("Fraction > comparison operator")
     Fraction b(1, 4);
     CHECK(a > b);
     CHECK_FALSE(a <= b);
-    // cout << " 0.3>a : " << (0.3 > a) << endl;
     CHECK(a > 0.3);
     CHECK_FALSE(a <= 0.3);
-    cout << " a<=0.3 : " << (a < 0.3) << endl;
-
     CHECK(1 > a);
     CHECK_FALSE(1 <= a);
 }
@@ -164,103 +157,108 @@ TEST_CASE("Fraction >= comparison operator")
     CHECK_FALSE(1 < a);
 }
 
-// TEST_CASE("Fraction == comparison operator") {
-//     Fraction a(1, 2);
-//     Fraction b(1, 4);
-//     Fraction c(2, 4); // Equivalent to 1/2
-//     Fraction d(1, 4);
+TEST_CASE("Fraction == comparison operator")
+{
+    Fraction a(1, 2);
+    Fraction b(1, 4);
+    Fraction c(2, 4); // Equivalent to 1/2
+    Fraction d(1, 4);
 
-//     CHECK(b == d); // Pure equality
-//     CHECK(a == c); // Reduced equality
-//     CHECK_FALSE(a == b);
-//     CHECK(a == 0.5);
-//     CHECK_FALSE(a == 0.3);
-//     CHECK(0.5 == a);
-//     CHECK_FALSE(0.3 == a);
-//     CHECK(b == d);
-// }
+    CHECK(b == d); // Pure equality
+    CHECK(a == c); // Reduced equality
+    CHECK_FALSE(a == b);
+    CHECK(a == 0.5);
+    CHECK_FALSE(a == 0.3);
+    CHECK(0.5 == a);
+    CHECK_FALSE(0.3 == a);
+    CHECK(b == d);
+}
 
-// TEST_CASE("Prefix and postfix increment operators on Fraction class") {
-//     Fraction a(1, 2);
+TEST_CASE("Prefix and postfix increment operators on Fraction class")
+{
+    Fraction a(1, 2);
 
-//     // Use prefix increment operator on Fraction object
-//     Fraction b = ++a;
-//     // Check that the value of a has been incremented to 3/2
-//     CHECK(a.getNumerator() == 3);
-//     CHECK(a.getDenominator() == 2);
-//     // Check that the value of b is also 3/2
-//     CHECK(b.getNumerator() == 3);
-//     CHECK(b.getDenominator() == 2);
+    // Use prefix increment operator on Fraction object
+    Fraction b = ++a;
+    // Check that the value of a has been incremented to 3/2
+    CHECK(a.getNumerator() == 3);
+    CHECK(a.getDenominator() == 2);
+    // Check that the value of b is also 3/2
+    CHECK(b.getNumerator() == 3);
+    CHECK(b.getDenominator() == 2);
 
-//     a = Fraction(1, 2); // Reset
+    a = Fraction(1, 2); // Reset
 
-//     // Use postfix increment operator on Fraction object
-//     Fraction c = a++;
-//     // Check that the value of a has been incremented to 3/2
-//     CHECK(a.getNumerator() == 3);
-//     CHECK(a.getDenominator() == 2);
-//     // Check that the value of c is still 1/2
-//     CHECK(c.getNumerator() == 1);
-//     CHECK(c.getDenominator() == 2);
-// }
+    // Use postfix increment operator on Fraction object
+    Fraction c = a++;
+    // Check that the value of a has been incremented to 3/2
+    CHECK(a.getNumerator() == 3);
+    CHECK(a.getDenominator() == 2);
+    // Check that the value of c is still 1/2
+    CHECK(c.getNumerator() == 1);
+    CHECK(c.getDenominator() == 2);
+}
 
-// TEST_CASE("Prefix and postfix decrement operators on Fraction class") {
-//     Fraction a(3, 2);
+TEST_CASE("Prefix and postfix decrement operators on Fraction class")
+{
+    Fraction a(3, 2);
 
-//     // Use prefix decrement operator on Fraction object
-//     Fraction b = --a;
-//     // Check that the value of a has been decremented to 1/2
-//     CHECK(a.getNumerator() == 1);
-//     CHECK(a.getDenominator() == 2);
-//     // Check that the value of b is also 1/2
-//     CHECK(b.getNumerator() == 1);
-//     CHECK(b.getDenominator() == 2);
+    // Use prefix decrement operator on Fraction object
+    Fraction b = --a;
+    // Check that the value of a has been decremented to 1/2
+    CHECK(a.getNumerator() == 1);
+    CHECK(a.getDenominator() == 2);
+    // Check that the value of b is also 1/2
+    CHECK(b.getNumerator() == 1);
+    CHECK(b.getDenominator() == 2);
 
-//     a = Fraction(3, 2); // Reset
+    a = Fraction(3, 2); // Reset
 
-//     // Use postfix decrement operator on Fraction object
-//     Fraction c = a--;
-//     // Check that the value of a has been decremented to 1/2
-//     CHECK(a.getNumerator() == 1);
-//     CHECK(a.getDenominator() == 2);
-//     // Check that the value of c is still 3/2
-//     CHECK(c.getNumerator() == 3);
-//     CHECK(c.getDenominator() == 2);
-// }
+    // Use postfix decrement operator on Fraction object
+    Fraction c = a--;
+    // Check that the value of a has been decremented to 1/2
+    CHECK(a.getNumerator() == 1);
+    CHECK(a.getDenominator() == 2);
+    // Check that the value of c is still 3/2
+    CHECK(c.getNumerator() == 3);
+    CHECK(c.getDenominator() == 2);
+}
 
-// TEST_CASE("Output and Input Stream Operators") {
-//     Fraction a(1, 2), b(3, 4);
-//     ostringstream os;
+TEST_CASE("Output and Input Stream Operators")
+{
+    Fraction a(1, 2), b(3, 4);
+    ostringstream os;
 
-//     // Test operator<<
-//     CHECK_NOTHROW(os << a); // Not thrwoing error
-//     CHECK(os.str() == "1/2"); // Prints well
+    // Test operator<<
+    CHECK_NOTHROW(os << a);   // Not thrwoing error
+    CHECK(os.str() == "1/2"); // Prints well
 
-//     istringstream is("5 6"); // Could also be "5,6" for ex
-//     istringstream bad_is("7");
+    istringstream is("5 6"); // Could also be "5,6" for ex
+    istringstream bad_is("7");
 
-//     // Test operator>>
-//     CHECK_NOTHROW(is >> b);
-//     CHECK(b.getNumerator() == 5);
-//     CHECK(b.getDenominator() == 6);
-//     CHECK_THROWS(bad_is >> b); // Throws cuz the input is one number
-// }
+    // Test operator>>
+    CHECK_NOTHROW(is >> b);
+    CHECK(b.getNumerator() == 5);
+    CHECK(b.getDenominator() == 6);
+    CHECK_THROWS(bad_is >> b); // Throws cuz the input is one number
+}
 
-// TEST_CASE("Rounding of float numbers during arithmetic operations with Fractions") {
-//     Fraction a(2, 5);
-//     float b = 0.2001; // During the "+" operation it'll became 0.200, which is 1/5
-//     Fraction c = a + b; // 2/5 + 1/5 = 3/5
-//     CHECK(((c.getNumerator() == 3) && (c.getDenominator() == 5)));
+TEST_CASE("Rounding of float numbers during arithmetic operations with Fractions")
+{
+    Fraction a(2, 5);
+    float b = 0.2001;   // During the "+" operation it'll became 0.200, which is 1/5
+    Fraction c = a + b; // 2/5 + 1/5 = 3/5
+    CHECK(((c.getNumerator() == 3) && (c.getDenominator() == 5)));
 
-//     b = 0.2001;
-//     c = a - b; // 1/5
-//     CHECK(((c.getNumerator() == 1) && (c.getDenominator() == 5)));
+    b = 0.2001;
+    c = a - b; // 1/5
+    CHECK(((c.getNumerator() == 1) && (c.getDenominator() == 5)));
 
-//     b = 0.2001;
-//     c = a * b; // 2/25
-//     CHECK(((c.getNumerator() == 2) && (c.getDenominator() == 25)));
+    b = 0.2001;
+    c = a * b; // 2/25
+    CHECK(((c.getNumerator() == 2) && (c.getDenominator() == 25)));
 
-//     b = 0.2001;
-//     c = a / b; // 2/1
-//     CHECK(((c.getNumerator() == 2) && (c.getDenominator() == 1)));
-//}
+    b = 0.2001;
+    c = a / b; // 2/1
+    CHECK(((c.getNumerator() == 2) && (c.getDenominator() == 1)));
+}
