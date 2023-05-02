@@ -197,14 +197,14 @@ namespace ariel
 
     bool Fraction::operator==(Fraction other)
     {
-        float num_0 = ((float)(this->_numerator / this->_numerator));
+        float num_0 = (((float)this->_numerator / (float)this->_numerator));
         float num_1 = ((float)(other.getNumerator() / other.getDenominator()));
         return num_0 == num_1;
     }
 
     bool operator==(float num, Fraction frac)
     {
-        float num_0 = ((float)(frac.getNumerator() / frac.getDenominator()));
+        float num_0 = (((float)frac.getNumerator() / (float)frac.getDenominator()));
         return (num == num_0);
     }
 
@@ -224,14 +224,14 @@ namespace ariel
 
     bool operator<(Fraction frac, float num)
     {
-        float num_1 = ((float)(frac.getNumerator() / frac.getDenominator()));
+        float num_1 = ((float)frac.getNumerator() / ((float)frac.getDenominator()));
         cout << num_1 << endl;
         return num_1 < num;
     }
 
     bool operator<(float num, Fraction frac)
     {
-        float num_1 = ((float)(frac.getNumerator() / frac.getDenominator()));
+        float num_1 = (((float)frac.getNumerator() / (float)frac.getDenominator()));
         return num < num_1;
     }
 
@@ -247,7 +247,7 @@ namespace ariel
         }
         else
         {
-            return ((float)(this->_numerator / this->_denominator)) <= ((float)(other.getNumerator() / other.getDenominator()));
+            return (((float)this->_numerator / (float)this->_denominator)) <= ((float)other.getNumerator() / (float)other.getDenominator());
         }
     }
 
@@ -269,7 +269,7 @@ namespace ariel
         {
             return this->_denominator < other.getDenominator();
         }
-        return ((float)(this->_numerator / this->_denominator)) > ((float)(other.getNumerator() / other.getDenominator()));
+        return (((float)this->_numerator / (float)this->_denominator)) > ((float)other.getNumerator() / (float)other.getDenominator());
     }
 
     bool operator>(Fraction frac, float num)
@@ -297,7 +297,7 @@ namespace ariel
 
         else
         {
-            return ((float)(this->_numerator / this->_denominator)) >= ((float)(other.getNumerator() / other.getDenominator()));
+            return ((float)this->_numerator / (float)this->_denominator) >= ((float)other.getNumerator() / (float)other.getDenominator());
         }
     }
 
