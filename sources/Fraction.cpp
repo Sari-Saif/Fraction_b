@@ -1,5 +1,7 @@
 /**
  *declare about implemention and logic of the structure  program
+ * https://en.cppreference.com/w/ :- url for tutorial that used
+ * https://en.cppreference.com/w/cpp/language/types :- url for tutorial that used
  *@author Sari Safe
  *@since 16.04.23
  */
