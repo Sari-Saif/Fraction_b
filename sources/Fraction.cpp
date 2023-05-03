@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <limits.h>
 #include "Fraction.hpp"
 using std::ostream, std::istream, std::endl, std::cout;
 
@@ -120,6 +121,15 @@ Fraction ariel::operator+(const Fraction &curr, const Fraction &other)
 {
     // default state and dont need of default constructor :)
     Fraction result(0, 1);
+
+    long long numerator = (long long)curr._numerator * other._denominator + (long long)curr._denominator * other._numerator;
+    long long denominator = (long long)curr._denominator * other._denominator;
+    // check if there overflow
+    if (numerator > INT_MAX || numerator < INT_MIN || denominator > INT_MAX || denominator < INT_MIN)
+    {
+        throw std::overflow_error("Overflow detected!");
+    }
+
     result._numerator = (curr._numerator * other._denominator) + (curr._denominator * other._numerator);
     result._denominator = (curr._denominator * other._denominator);
     result.simplify();
@@ -129,23 +139,25 @@ Fraction ariel::operator+(const Fraction &curr, const Fraction &other)
 Fraction ariel::operator+(float number, const Fraction &frac)
 {
     Fraction a = Fraction(number);
-    int num = frac._denominator * a._numerator + frac._numerator * a._denominator;
-    int den = frac._denominator * a._denominator;
-    return Fraction(num, den);
+    return frac + a;
 }
 
 Fraction ariel::operator+(const Fraction &frac, float number)
 {
-
     Fraction a = Fraction(number);
-    int num = frac._denominator * a.getNumerator() + frac._numerator * a.getDenominator();
-    int den = frac._denominator * a.getDenominator();
-    return Fraction(num, den);
+    return frac + a;
 }
 
-// here we use the + operator to subscracts
 Fraction ariel::operator-(const Fraction &curr, const Fraction &other)
 {
+    long long numerator = (long long)curr._numerator * other._denominator - (long long)other._numerator * curr._denominator;
+    long long denominator = (long long)curr._denominator * other._denominator;
+    // Check for overflow
+    if (numerator > INT_MAX || numerator < INT_MIN || denominator > INT_MAX || denominator < INT_MIN)
+    {
+        throw std::overflow_error("Overflow detected!");
+    }
+
     int num = curr._numerator * other._denominator - other._numerator * curr._denominator;
     int den = other._denominator * curr._denominator;
     return Fraction(num, den);
@@ -166,6 +178,14 @@ Fraction ariel::operator*(const Fraction &curr, const Fraction &other)
 {
     // default state and dont need of default constructor :)
     Fraction result(0, 1);
+    long long numerator = (long long)curr._numerator * other._numerator;
+    long long denominator = (long long)curr._denominator * other._denominator;
+    // check if there overflow
+    if (numerator > INT_MAX || numerator < INT_MIN || denominator > INT_MAX || denominator < INT_MIN)
+    {
+        throw std::overflow_error("Overflow detected!");
+    }
+
     result._numerator = (curr._numerator * other._numerator);
     result._denominator = (curr._denominator * other._denominator);
     result.simplify();
@@ -195,6 +215,14 @@ Fraction ariel::operator*(const Fraction &frac, float num)
 
 Fraction ariel::operator/(const Fraction &curr, const Fraction &other)
 {
+    long long numerator = (long long)curr._numerator * other._denominator;
+    long long denominator = (long long)curr._denominator * other._denominator;
+    // check if there overflow
+    if (numerator > INT_MAX || numerator < INT_MIN || denominator > INT_MAX || denominator < INT_MIN)
+    {
+        throw std::overflow_error("Overflow detected!");
+    }
+
     int num = curr._numerator * other._denominator;
     int den = curr._denominator * other._numerator;
     if (num == 0 || den == 0)
