@@ -19,6 +19,14 @@ Fraction::Fraction(int numerator,
     {
         throw std::invalid_argument(" cannot be 0 .");
     }
+
+    // in the case there negative value(negative Fraction) and we want represent him in numerator
+    if (_denominator < 0)
+    {
+
+        _numerator = -1 * numerator;
+        _denominator = -1 * denominator;
+    }
     // simplify the fraction
     simplify();
 }
@@ -98,7 +106,12 @@ istream &ariel::operator>>(istream &into, Fraction &other)
     if (other._denominator == 1)
     {
         into.clear();
-        throw std::invalid_argument("there need two parameters to absorb to build a fractoin ");
+        throw std::runtime_error("there need two parameters to absorb to build a fractoin ");
+    }
+    if (other._denominator == 0)
+    {
+        into.clear();
+        throw std::runtime_error("there need two parameters to absorb to build a fractoin ");
     }
     return into;
 }
@@ -113,19 +126,20 @@ Fraction ariel::operator+(const Fraction &curr, const Fraction &other)
     return result;
 }
 
-Fraction ariel::operator+(float j, const Fraction &frac)
+Fraction ariel::operator+(float number, const Fraction &frac)
 {
-    Fraction a = Fraction(j);
+    Fraction a = Fraction(number);
     int num = frac._denominator * a._numerator + frac._numerator * a._denominator;
     int den = frac._denominator * a._denominator;
     return Fraction(num, den);
 }
 
-Fraction ariel::operator+(const Fraction &frac, float j)
+Fraction ariel::operator+(const Fraction &frac, float number)
 {
-    Fraction a = Fraction(j);
-    int num = frac.getDenominator() * a.getNumerator() + frac.getNumerator() * a.getDenominator();
-    int den = frac.getDenominator() * a.getDenominator();
+
+    Fraction a = Fraction(number);
+    int num = frac._denominator * a.getNumerator() + frac._numerator * a.getDenominator();
+    int den = frac._denominator * a.getDenominator();
     return Fraction(num, den);
 }
 
@@ -173,30 +187,37 @@ Fraction ariel::operator*(const Fraction &frac, float num)
 {
     Fraction a = Fraction(num);
     a.simplify();
-    int ner = a.getNumerator() * frac.getNumerator();
-    int det = a.getDenominator() * frac.getDenominator();
+    int ner = a.getNumerator() * frac._numerator;
+    int det = a.getDenominator() * frac._denominator;
     // 1. here we can be confidence that there no divided  with 0
     return Fraction(ner, det);
 }
 
 Fraction ariel::operator/(const Fraction &curr, const Fraction &other)
 {
+    if (curr._numerator == 0 || other._numerator == 0)
+    {
+        throw std::runtime_error(" cannot be 0 .");
+    }
     int num = curr._numerator * other._denominator;
     int den = curr._denominator * other._numerator;
 
     return Fraction(num, den);
 }
 
-Fraction ariel::operator/(float num, const Fraction &frac)
+Fraction ariel::operator/(float number, const Fraction &frac)
 {
+    if (number == 0)
+    {
+        throw std::runtime_error(" there no divide by zero");
+    }
     if (frac._numerator == 0)
     {
-        throw std::runtime_error(" cannot be 0 .");
+        throw std::invalid_argument(" cannot be 0 .");
     }
 
-    // 1. here too.
-
-    return Fraction(num) * Fraction(frac._denominator, frac._numerator);
+    Fraction res = Fraction(number) * Fraction(frac._denominator, frac._numerator);
+    return res;
 }
 
 Fraction ariel::operator/(const Fraction &frac, float num)
@@ -204,9 +225,7 @@ Fraction ariel::operator/(const Fraction &frac, float num)
     if (num == 0)
     {
         throw std::runtime_error(" cannot be 0 .");
-        ;
     }
-
     return (Fraction(frac._numerator, frac._denominator) / Fraction(num));
 }
 
