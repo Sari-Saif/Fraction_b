@@ -28,6 +28,12 @@ namespace ariel
     // convert float to fraction
     Fraction(float);
 
+        // help function
+    void simplify();
+    // getters
+    int getNumerator() const;
+    int getDenominator() const;
+
     /* istream and ostream */
     friend ostream &operator<<(ostream &, Fraction &);
     friend istream &operator>>(istream &, Fraction &);
@@ -162,12 +168,6 @@ namespace ariel
       decrement Fractoin(--Fractior)
     */
     Fraction &operator--();
-
-    // help function
-    void simplify();
-    // getters
-    int getNumerator() const;
-    int getDenominator() const;
   };
 
 };

@@ -40,6 +40,7 @@ int Fraction::getNumerator() const
 {
     return _numerator;
 }
+
 int Fraction::getDenominator() const
 {
     return _denominator;
@@ -180,8 +181,8 @@ Fraction ariel::operator*(const Fraction &frac, float num)
 
 Fraction ariel::operator/(const Fraction &curr, const Fraction &other)
 {
-    int num = curr._numerator * other._numerator;
-    int den = curr._denominator * other._denominator;
+    int num = curr._numerator * other._denominator;
+    int den = curr._denominator * other._numerator;
 
     return Fraction(num, den);
 }
