@@ -32,7 +32,7 @@ Fraction::Fraction(int numerator,
 }
 
 // default ctor
-Fraction::Fraction() : _numerator(1), _denominator(1){
+Fraction::Fraction() : _numerator(0), _denominator(1){
 
                                       };
 
@@ -195,13 +195,12 @@ Fraction ariel::operator*(const Fraction &frac, float num)
 
 Fraction ariel::operator/(const Fraction &curr, const Fraction &other)
 {
-    if (curr._numerator == 0 || other._numerator == 0)
+    int num = curr._numerator * other._denominator;
+    int den = curr._denominator * other._numerator;
+    if (num == 0 || den == 0)
     {
         throw std::runtime_error(" cannot be 0 .");
     }
-    int num = curr._numerator * other._denominator;
-    int den = curr._denominator * other._numerator;
-
     return Fraction(num, den);
 }
 
@@ -209,7 +208,8 @@ Fraction ariel::operator/(float number, const Fraction &frac)
 {
     if (number == 0)
     {
-        throw std::runtime_error(" there no divide by zero");
+        // return to us default fraction(0/1)
+        return Fraction();
     }
     if (frac._numerator == 0)
     {
@@ -222,33 +222,66 @@ Fraction ariel::operator/(float number, const Fraction &frac)
 
 Fraction ariel::operator/(const Fraction &frac, float num)
 {
+    bool ch = (frac._numerator == 0 && frac._denominator != 0);
     if (num == 0)
     {
         throw std::runtime_error(" cannot be 0 .");
     }
-    return (Fraction(frac._numerator, frac._denominator) / Fraction(num));
+    else if (ch)
+    {
+        // return to us default fraction(0/1)
+        return Fraction();
+    }
+    else
+    {
+
+        return (Fraction(frac._numerator, frac._denominator) / Fraction(num));
+    }
 }
 
 bool ariel::operator==(const Fraction &curr, const Fraction &other)
 {
-    Fraction f1((float)curr._numerator / curr._denominator);
-    Fraction f2((float)other._numerator / other._denominator);
 
-    f1.simplify();
-    f2.simplify();
+    bool res1 = (curr._numerator == 0 && curr._denominator != 0);
+    bool res2 = (other._numerator == 0 && other._denominator != 0);
+    if (res1 && res2)
+    {
+        return true;
+    }
+    else
+    {
 
-    return (curr._numerator == other._numerator) && (curr._denominator == other._denominator);
+        Fraction f1((float)curr._numerator / curr._denominator);
+        Fraction f2((float)other._numerator / other._denominator);
+
+        f1.simplify();
+        f2.simplify();
+
+        return (f1._numerator == f2._numerator) && (f1._denominator == f2._denominator);
+    }
 }
 
 bool ariel::operator==(float num, const Fraction &frac)
 {
-    float num_0 = ((float)frac._numerator / frac._denominator);
+    float num_0;
+    if (frac._numerator == 0 && frac._denominator != 0)
+    {
+        num_0 = 0;
+    }
+
+    num_0 = ((float)frac._numerator / frac._denominator);
     return (num == num_0);
 }
 
 bool ariel::operator==(const Fraction &frac, float num)
 {
-    float num_0 = ((float)frac._numerator / frac._denominator);
+    float num_0;
+    if (frac._numerator == 0 && frac._denominator != 0)
+    {
+        num_0 = 0;
+    }
+
+    num_0 = ((float)frac._numerator / frac._denominator);
     return (num_0 == num);
 }
 
