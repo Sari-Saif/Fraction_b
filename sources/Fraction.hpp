@@ -18,7 +18,12 @@ namespace ariel
   private:
     int _numerator;
     int _denominator;
-    /*greatest common divisor of the original values of two integeres.*/
+    /**
+     * gcd function : greatest common divisor of the original values of two integeres.
+     * @param input two integeres(num_0, num_1)
+     * @param return gcd(num_0,num_1)
+     *
+     */
     int GCD(int, int) const;
 
   public:
@@ -28,7 +33,7 @@ namespace ariel
     // convert float to fraction
     Fraction(float);
 
-        // help function
+    // help function
     void simplify();
     // getters
     int getNumerator() const;

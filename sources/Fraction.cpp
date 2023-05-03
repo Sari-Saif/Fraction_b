@@ -22,11 +22,11 @@ Fraction::Fraction(int numerator,
     }
 
     // in the case there negative value(negative Fraction) and we want represent him in numerator
-    if (_denominator < 0)
+    if (_denominator < 0 && _numerator > 0)
     {
 
-        _numerator = -1 * numerator;
-        _denominator = -1 * denominator;
+        _numerator *= -1;
+        _denominator *= -1;
     }
     // simplify the fraction
     simplify();
@@ -55,11 +55,6 @@ int Fraction::getDenominator() const
     return _denominator;
 }
 
-/**
- * gcd function
- * @param input two integeres(num_0, num_1)
- * @param return gcd(num_0,num_1)
- */
 int Fraction::GCD(int num_0, int num_1) const
 {
 
@@ -94,12 +89,24 @@ ostream &ariel::operator<<(ostream &out, Fraction &other)
     {
         throw std::invalid_argument("Err");
     }
+    // by the tests there need to display the negative value in  numerator
+    if (other._denominator < 0 && other._numerator > 0)
+    {
+        out << -1 * other._numerator << "/" << -1 * other._denominator;
+        return out;
+    }
+    else if (other._denominator < 0 && other._numerator < 0)
+    {
+        out << other._numerator << "/" << -1 * other._denominator;
+        return out;
+    }
     out << other._numerator << "/" << other._denominator;
     return out;
 }
 
 istream &ariel::operator>>(istream &into, Fraction &other)
 {
+
     // temporary parameters
     other._denominator = 1;
     other._numerator = 1;
@@ -257,7 +264,7 @@ Fraction ariel::operator/(const Fraction &frac, float num)
     }
     else if (ch)
     {
-        // return to us default fraction(0/1)
+        // return to us default fraction(0/1 -> 0)
         return Fraction();
     }
     else
@@ -319,7 +326,7 @@ bool ariel::operator<(const Fraction &curr, const Fraction &other)
     {
         return curr._denominator > other._denominator; // must be true , satisfied answer .
     }
-    return ((float)(curr._numerator / curr._denominator)) < ((float)(other._numerator / other._denominator));
+    return (((float)curr._numerator / curr._denominator)) < (((float)other._numerator / other._denominator));
 }
 
 bool ariel::operator<(const Fraction &frac, float num)
@@ -385,13 +392,15 @@ bool ariel::operator>(float num, const Fraction &frac)
 
 bool ariel::operator>=(const Fraction &curr, const Fraction &other)
 {
-    if (curr._numerator == other._numerator && other._numerator == curr._denominator)
+    if (curr._numerator == other._numerator && other._denominator == curr._denominator)
     {
         return true;
     }
     else if (curr._numerator == other._numerator)
     {
-        return curr._denominator < other._denominator; // must be true , satisfied answer .
+        return curr._denominator <= other._denominator; // must be true
+                                                        // satisfied answer : in math if the denominator is greater that mean
+                                                        // the fraction have lower value
     }
 
     else
@@ -420,19 +429,19 @@ Fraction &Fraction::operator--()
 
 Fraction Fraction::operator--(int dumy_flag_for_increment)
 {
-    //_numerator += _denominator;
+
     Fraction min_copy(*this);
+    // that mean we add 1
     _numerator -= _denominator;
-    // simplify();
+
     return min_copy;
 }
 
 Fraction Fraction ::operator++(int dumy_flag_for_increment)
 {
-    //_numerator += _denominator;
     Fraction p_copy(*this);
+    // that mean we add 1
     _numerator += _denominator;
-    // simplify();
     return p_copy;
 }
 
