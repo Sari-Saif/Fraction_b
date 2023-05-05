@@ -99,7 +99,7 @@ ostream &ariel::operator<<(ostream &out, Fraction &other)
     }
     else if (other._denominator < 0 && other._numerator < 0)
     {
-        out << other._numerator << "/" << -1 * other._denominator;
+        out << -1 * other._numerator << "/" << -1 * other._denominator;
         return out;
     }
     out << other._numerator << "/" << other._denominator;
