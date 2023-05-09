@@ -8,8 +8,8 @@
 #pragma once
 
 #include <iostream>
-
 using std::istream, std::ostream;
+
 namespace ariel
 {
 
@@ -40,7 +40,7 @@ namespace ariel
     int getDenominator() const;
 
     /* istream and ostream */
-    friend ostream &operator<<(ostream &, Fraction &);
+    friend ostream &operator<<(ostream &, const Fraction &);
     friend istream &operator>>(istream &, Fraction &);
 
     /*

@@ -85,7 +85,7 @@ void Fraction::simplify()
 }
 //-------------------------------------The Main Function's---------------------------------------------------------------------------------------------------------------------------------//
 // must pass the stream by reference, not by value. streams are not copyable
-ostream &ariel::operator<<(ostream &out, Fraction &other)
+ostream &ariel::operator<<(ostream &out, const Fraction &other)
 {
     if (typeid(other) != typeid(Fraction))
     {
